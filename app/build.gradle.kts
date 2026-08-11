@@ -73,6 +73,6 @@ kotlin {
     }
 }
 
-// No dependencies on purpose: the whole app runs on framework APIs, so the release
-// artifact stays under 40 KB after R8 shrinks the Kotlin stdlib.
+// No dependencies on purpose: the whole app runs on framework APIs, which keeps the
+// release artifact tiny once R8 shrinks the Kotlin stdlib.
 dependencies {}

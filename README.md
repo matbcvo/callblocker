@@ -1,8 +1,7 @@
 # Call Blocker
 
 A minimal Android app that rejects every incoming call from a number that is not in your
-contacts. No libraries, no analytics, no network access — the release APK is roughly
-100 KB.
+contacts. No libraries, no analytics, no network access.
 
 ## How it works
 
