@@ -43,22 +43,17 @@ The app also keeps its own list of the last 100 blocked calls, visible on the ma
 
 - Android 10 (API 29) or newer. This is a hard floor: on older versions only the default
   dialer could screen calls.
-- **JDK 17.** Not 21, not 26 — Android Gradle Plugin 8.9.1 runs on 17 through 21, and
-  Gradle 8.11.1 refuses to start on anything newer than JDK 23. A JDK 26 install will
-  fail before compiling a single file. Android Studio ships its own bundled JDK, so if
-  you build there you need no system JDK at all.
+- **JDK 17** — what CI uses and what the project is verified against. Android Studio
+  ships its own bundled JDK, so building there needs no system JDK at all.
 - Android SDK with platform 36 and build-tools 36 (`compileSdk 36`).
+
+Toolchain versions, all pinned in the repo: Gradle **9.7.0** (wrapper), Android Gradle
+Plugin **9.3.1**, Kotlin **2.4.10**. AGP 9 has Kotlin support built in, so there is no
+separate Kotlin plugin applied.
 
 ## Building
 
-The Gradle wrapper JAR is not checked in. Either open the project in Android Studio
-(it generates the wrapper on first sync), or generate it once with a local Gradle 8.11.1+:
-
-```bash
-gradle wrapper
-```
-
-Then:
+The Gradle wrapper is committed, so nothing needs installing beyond a JDK and the SDK:
 
 ```bash
 ./gradlew assembleDebug                        # app/build/outputs/apk/debug/
@@ -79,8 +74,7 @@ push to `main` and every pull request, and uploads both as workflow artifacts. T
 APK is signed with the standard debug key and installs on a device as-is — the quickest
 way to get a build onto a phone without touching signing.
 
-Both workflows use `gradle` directly because the wrapper JAR is not committed. Once you
-commit a `gradlew` + `gradle-wrapper.jar`, they switch to it automatically.
+Both workflows run the committed wrapper, so CI and local builds use the same Gradle.
 
 ## Releasing to Google Play
 

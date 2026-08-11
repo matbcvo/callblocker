@@ -1,6 +1,5 @@
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
 }
 
 // Release signing is driven entirely by environment variables so the keystore never
@@ -56,11 +55,9 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
-    }
+    // AGP 9 removed the `kotlinOptions` block; Kotlin's JVM target is configured
+    // through the built-in Kotlin DSL below.
 
-    // Nothing here needs the resource-heavy AndroidX stack.
     buildFeatures {
         buildConfig = false
     }
@@ -70,6 +67,12 @@ android {
     }
 }
 
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+    }
+}
+
 // No dependencies on purpose: the whole app runs on framework APIs, so the release
-// artifact stays around ~100 KB after R8 shrinks the Kotlin stdlib.
+// artifact stays under 40 KB after R8 shrinks the Kotlin stdlib.
 dependencies {}
