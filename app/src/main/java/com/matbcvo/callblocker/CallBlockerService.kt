@@ -79,6 +79,10 @@ class CallBlockerService : CallScreeningService() {
         val preferences = Preferences(this)
         if (!preferences.blockingEnabled) return true
 
+        // Checked before the contacts lookup, so this mode keeps working even if
+        // contacts permission is missing — there is nothing to look up.
+        if (preferences.blockEveryIncomingCall) return false
+
         if (checkSelfPermission(Manifest.permission.READ_CONTACTS)
             != PackageManager.PERMISSION_GRANTED
         ) {

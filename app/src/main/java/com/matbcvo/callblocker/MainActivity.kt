@@ -29,6 +29,7 @@ class MainActivity : Activity() {
     private lateinit var screeningRoleButton: Button
     private lateinit var contactsPermissionButton: Button
     private lateinit var blockingEnabledSwitch: Switch
+    private lateinit var blockEveryCallSwitch: Switch
     private lateinit var silenceInsteadOfRejectSwitch: Switch
     private lateinit var keepInCallLogSwitch: Switch
     private lateinit var notifyWhenBlockedSwitch: Switch
@@ -46,6 +47,7 @@ class MainActivity : Activity() {
         screeningRoleButton = findViewById(R.id.button_screening_role)
         contactsPermissionButton = findViewById(R.id.button_contacts_permission)
         blockingEnabledSwitch = findViewById(R.id.switch_blocking_enabled)
+        blockEveryCallSwitch = findViewById(R.id.switch_block_every_call)
         silenceInsteadOfRejectSwitch = findViewById(R.id.switch_silence_instead_of_reject)
         keepInCallLogSwitch = findViewById(R.id.switch_keep_in_call_log)
         notifyWhenBlockedSwitch = findViewById(R.id.switch_notify_when_blocked)
@@ -61,6 +63,10 @@ class MainActivity : Activity() {
 
         blockingEnabledSwitch.setOnCheckedChangeListener { _, isChecked ->
             preferences.blockingEnabled = isChecked
+            renderStatus()
+        }
+        blockEveryCallSwitch.setOnCheckedChangeListener { _, isChecked ->
+            preferences.blockEveryIncomingCall = isChecked
             renderStatus()
         }
         silenceInsteadOfRejectSwitch.setOnCheckedChangeListener { _, isChecked ->
@@ -79,6 +85,7 @@ class MainActivity : Activity() {
     override fun onResume() {
         super.onResume()
         blockingEnabledSwitch.isChecked = preferences.blockingEnabled
+        blockEveryCallSwitch.isChecked = preferences.blockEveryIncomingCall
         silenceInsteadOfRejectSwitch.isChecked = preferences.silenceInsteadOfReject
         keepInCallLogSwitch.isChecked = preferences.keepBlockedCallsInCallLog
         notifyWhenBlockedSwitch.isChecked = preferences.notifyWhenCallBlocked
@@ -179,17 +186,24 @@ class MainActivity : Activity() {
         val hasCallScreeningRole = CallBlockerService.isCallScreeningRoleHeld(this)
         val hasContactsPermission = isPermissionGranted(Manifest.permission.READ_CONTACTS)
 
+        // Contacts are only consulted when somebody is meant to get through, so when
+        // everything is blocked the permission is neither needed nor worth nagging for.
+        val needsContacts = !preferences.blockEveryIncomingCall
+
         screeningRoleButton.visibility = if (hasCallScreeningRole) View.GONE else View.VISIBLE
         contactsPermissionButton.visibility =
-            if (hasContactsPermission) View.GONE else View.VISIBLE
+            if (hasContactsPermission || !needsContacts) View.GONE else View.VISIBLE
 
         val (statusTitleRes, statusDetailRes) = when {
             !hasCallScreeningRole ->
                 R.string.status_inactive to R.string.status_inactive_detail
-            !hasContactsPermission ->
-                R.string.status_no_contacts to R.string.status_no_contacts_detail
             !preferences.blockingEnabled ->
                 R.string.status_paused to R.string.status_paused_detail
+            preferences.blockEveryIncomingCall ->
+                R.string.status_blocking_everything to
+                    R.string.status_blocking_everything_detail
+            !hasContactsPermission ->
+                R.string.status_no_contacts to R.string.status_no_contacts_detail
             else ->
                 R.string.status_active to R.string.status_active_detail
         }

@@ -4,6 +4,8 @@
 
     <string name="status_active">Blocking is on</string>
     <string name="status_active_detail">Calls from numbers that are not in your contacts are rejected.</string>
+    <string name="status_blocking_everything">Blocking every call</string>
+    <string name="status_blocking_everything_detail">Every incoming call is rejected, including calls from your contacts. Nobody can reach you by phone.</string>
     <string name="status_paused">Blocking is paused</string>
     <string name="status_paused_detail">Every call rings through until you turn blocking back on.</string>
     <string name="status_inactive">Not set up</string>
@@ -16,6 +18,8 @@
     <string name="action_clear">Clear</string>
 
     <string name="option_enabled">Block calls from unknown numbers</string>
+    <string name="option_block_contacts">Block calls from contacts too</string>
+    <string name="option_block_contacts_hint">Nobody gets through, including people in your contacts. A callback from a doctor, a delivery driver, or an emergency service will be blocked as well.</string>
     <string name="option_silence">Silence instead of reject</string>
     <string name="option_silence_hint">The caller hears normal ringing and can leave voicemail. Your phone stays quiet.</string>
     <string name="option_call_log">Keep blocked calls in the call log</string>

@@ -27,6 +27,16 @@ class Preferences(context: Context) {
         set(value) = sharedPreferences.edit().putBoolean(KEY_BLOCKING_ENABLED, value).apply()
 
     /**
+     * When true nothing gets through at all — saved contacts are blocked alongside
+     * everyone else. Off by default: the app's whole promise is that people you know
+     * can still reach you, so this has to be a deliberate choice.
+     */
+    var blockEveryIncomingCall: Boolean
+        get() = sharedPreferences.getBoolean(KEY_BLOCK_EVERY_INCOMING_CALL, false)
+        set(value) =
+            sharedPreferences.edit().putBoolean(KEY_BLOCK_EVERY_INCOMING_CALL, value).apply()
+
+    /**
      * When true a blocked call is silenced and left to ring out (caller hears normal
      * ringing, then voicemail). When false it is rejected immediately, which most
      * networks present to the caller as busy.
@@ -81,6 +91,7 @@ class Preferences(context: Context) {
 
     private companion object {
         const val KEY_BLOCKING_ENABLED = "enabled"
+        const val KEY_BLOCK_EVERY_INCOMING_CALL = "block_every_incoming_call"
         const val KEY_SILENCE_INSTEAD_OF_REJECT = "silence_instead_of_reject"
         const val KEY_KEEP_IN_CALL_LOG = "keep_in_call_log"
         const val KEY_NOTIFY_WHEN_BLOCKED = "notify_on_block"

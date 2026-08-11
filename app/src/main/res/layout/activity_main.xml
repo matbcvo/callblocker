@@ -57,6 +57,21 @@
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <Switch
+            android:id="@+id/switch_block_every_call"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/option_block_contacts"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/option_block_contacts_hint"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="?android:attr/textColorSecondary" />
+
+        <Switch
             android:id="@+id/switch_silence_instead_of_reject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
