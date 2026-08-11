@@ -30,17 +30,17 @@ swallows every call when a permission changes is worse than no blocker at all.
 
 ## Options
 
-- **Block calls from unknown numbers** — master switch; when off nothing is filtered.
-- **Block calls from contacts too** — off by default. Turns the app into a total block:
+- **Block incoming calls from unknown numbers** — master switch; when off nothing is filtered.
+- **Block incoming calls from contacts** — off by default. Turns the app into a total block:
   every incoming call is rejected, saved contacts included, and nobody can reach you by
   phone. Contacts permission is not consulted in this mode, since there is nothing to
   look up. Note that Android's own Do Not Disturb covers the common case better, with
   schedules and exceptions for repeat callers; this option is for wanting the phone line
   shut outright.
-- **Silence instead of reject** — the call still arrives but the phone stays quiet and
+- **Silence incoming calls instead of rejecting them** — the call still arrives but the phone stays quiet and
   rings out to voicemail, instead of the caller getting a busy tone.
-- **Keep blocked calls in the call log** — on by default, so you can see what you missed.
-- **Notify me when a call is blocked** — a low-priority notification per blocked caller.
+- **Keep blocked calls in the system call log** — on by default, so you can see what you missed.
+- **Notify me when an incoming call is blocked** — a low-priority notification per blocked caller.
 
 The app also keeps its own list of the last 100 blocked calls, visible on the main screen.
 
@@ -194,6 +194,6 @@ test on hardware.
   reliable.
 - Emergency callbacks are not special-cased: if an emergency service calls you back from
   a number you have not saved, it will be blocked. Turn blocking off if you are expecting
-  such a call. With **Block calls from contacts too** enabled this extends to every
+  such a call. With **Block incoming calls from contacts** enabled this extends to every
   caller without exception — the setting is persistent and does not expire on its own, so
   it is easy to leave on and forget.
