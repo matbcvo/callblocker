@@ -1,4 +1,4 @@
-package com.matbcvo.callblocker
+package ee.prica.callblocker
 
 import android.content.Context
 import android.content.SharedPreferences

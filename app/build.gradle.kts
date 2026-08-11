@@ -16,11 +16,11 @@ base {
 }
 
 android {
-    namespace = "com.matbcvo.callblocker"
+    namespace = "ee.prica.callblocker"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.matbcvo.callblocker"
+        applicationId = "ee.prica.callblocker"
         // CallScreeningService can only reject calls from API 29 (Android 10) onwards,
         // where an app can hold ROLE_CALL_SCREENING without being the default dialer.
         minSdk = 29

@@ -1,4 +1,4 @@
-package com.matbcvo.callblocker
+package ee.prica.callblocker
 
 import android.Manifest
 import android.app.Notification
