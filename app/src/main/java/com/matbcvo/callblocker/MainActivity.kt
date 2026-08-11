@@ -3,8 +3,10 @@ package com.matbcvo.callblocker
 import android.Manifest
 import android.app.Activity
 import android.app.role.RoleManager
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.format.DateUtils
@@ -59,6 +61,15 @@ class MainActivity : Activity() {
         findViewById<Button>(R.id.button_clear_history).setOnClickListener {
             preferences.clearBlockedCallHistory()
             renderBlockedCallHistory()
+        }
+
+        findViewById<TextView>(R.id.version_text).text =
+            getString(R.string.about_version, applicationVersionName())
+        findViewById<Button>(R.id.button_view_source).setOnClickListener {
+            openLink(getString(R.string.url_source))
+        }
+        findViewById<Button>(R.id.button_privacy_policy).setOnClickListener {
+            openLink(getString(R.string.url_privacy))
         }
 
         blockingEnabledSwitch.setOnCheckedChangeListener { _, isChecked ->
@@ -179,6 +190,31 @@ class MainActivity : Activity() {
 
     private fun isPermissionGranted(permission: String) =
         checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED
+
+    // --- about -------------------------------------------------------------------
+
+    private fun applicationVersionName(): String {
+        val packageInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            packageManager.getPackageInfo(
+                packageName,
+                PackageManager.PackageInfoFlags.of(0),
+            )
+        } else {
+            @Suppress("DEPRECATION")
+            packageManager.getPackageInfo(packageName, 0)
+        }
+        return packageInfo.versionName.orEmpty()
+    }
+
+    private fun openLink(url: String) {
+        try {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+        } catch (error: ActivityNotFoundException) {
+            // A device with no browser is unusual but not impossible; better a toast
+            // than a crash from an unhandled intent.
+            Toast.makeText(this, R.string.no_browser, Toast.LENGTH_LONG).show()
+        }
+    }
 
     // --- rendering ---------------------------------------------------------------
 

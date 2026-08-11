@@ -30,6 +30,13 @@
 
     <string name="unknown_number">Unknown number</string>
 
+    <string name="about_version">Call Blocker %1$s</string>
+    <string name="action_view_source">Open source on GitHub</string>
+    <string name="action_privacy_policy">Privacy policy</string>
+    <string name="no_browser">No app available to open links.</string>
+    <string name="url_source" translatable="false">https://github.com/matbcvo/callblocker</string>
+    <string name="url_privacy" translatable="false">https://matbcvo.github.io/callblocker/privacy.html</string>
+
     <string name="channel_blocked_calls">Blocked calls</string>
     <string name="notification_title">Call blocked</string>
 
