@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- Settings are worth restoring; the blocked-call history is not. -->
+    <include
+        domain="sharedpref"
+        path="call_blocker.xml" />
+</full-backup-content>

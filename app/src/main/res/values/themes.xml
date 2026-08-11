@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- DeviceDefault keeps the app free of any AppCompat/Material dependency while
+         still following the system light/dark setting. -->
+    <style name="AppTheme" parent="@android:style/Theme.DeviceDefault.DayNight" />
+</resources>
