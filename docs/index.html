@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Call Blocker — only your contacts get through</title>
+<meta name="description" content="A lightweight Android app that blocks incoming calls from numbers that are not in your contacts.">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #5c5c5c;
+    --rule: #e3e3e3;
+    --accent: #b3261e;
+    --card: #f7f7f7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121212;
+      --fg: #e8e8e8;
+      --muted: #a0a0a0;
+      --rule: #2e2e2e;
+      --accent: #f2b8b5;
+      --card: #1c1c1c;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0 auto;
+    padding: 3rem 1.25rem 4rem;
+    max-width: 44rem;
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  h1 { font-size: 2.1rem; line-height: 1.15; margin: 0 0 .4rem; }
+  h2 { font-size: 1.2rem; margin: 2.25rem 0 .6rem; }
+  .tagline { color: var(--muted); font-size: 1.05rem; margin: 0 0 2rem; }
+  a { color: var(--accent); }
+  ul { padding-left: 1.25rem; }
+  li { margin: .35rem 0; }
+  code {
+    background: var(--card);
+    padding: .12em .38em;
+    border-radius: 4px;
+    font-size: .9em;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .cta {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--bg);
+    text-decoration: none;
+    font-weight: 600;
+    padding: .7rem 1.3rem;
+    border-radius: 8px;
+    margin: .5rem .5rem .5rem 0;
+  }
+  .note { background: var(--card); border-left: 3px solid var(--accent); padding: .9rem 1.1rem; border-radius: 0 6px 6px 0; margin: 1.5rem 0; }
+  footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: .9rem; }
+</style>
+</head>
+<body>
+
+<h1>Call Blocker</h1>
+<p class="tagline">Incoming calls from numbers that are not in your contacts are rejected. Nothing else.</p>
+
+<p>
+  <a class="cta" href="https://github.com/matbcvo/callblocker/releases/latest">Download the APK</a>
+  <a class="cta" style="background:transparent;color:var(--accent);border:1px solid var(--rule)" href="https://github.com/matbcvo/callblocker">Source on GitHub</a>
+</p>
+
+<h2>What it does</h2>
+<ul>
+  <li>Rejects incoming calls from numbers not saved in your contacts.</li>
+  <li>Withheld and private numbers are blocked too — there is no number to match.</li>
+  <li>Optionally silences instead of rejecting, so callers reach voicemail normally.</li>
+  <li>Keeps a local list of recently blocked calls so you can see what you missed.</li>
+</ul>
+
+<h2>Why it is small</h2>
+<p>
+  The app has zero third-party dependencies and uses Android's own
+  <code>CallScreeningService</code>. The release build is under 40&nbsp;KB — smaller than
+  most icons.
+</p>
+
+<div class="note">
+  <strong>Requires Android 10 or newer.</strong> Older versions only let the default phone
+  app screen calls. Android also permits one call-screening app at a time, so enabling
+  this replaces your current one.
+</div>
+
+<h2>Privacy</h2>
+<p>
+  It collects nothing and has no internet permission at all. See the
+  <a href="privacy.html">privacy policy</a>.
+</p>
+
+<footer>
+  Open source under
+  <a href="https://github.com/matbcvo/callblocker">github.com/matbcvo/callblocker</a>
+  &middot; <a href="privacy.html">Privacy policy</a>
+</footer>
+
+</body>
+</html>

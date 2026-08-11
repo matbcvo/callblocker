@@ -12,6 +12,15 @@ class Preferences(context: Context) {
     private val sharedPreferences: SharedPreferences =
         context.applicationContext.getSharedPreferences("call_blocker", Context.MODE_PRIVATE)
 
+    /**
+     * The blocked-call history lives in its own file so that Android's backup rules can
+     * exclude it — backup granularity is per file, not per key. Settings are worth
+     * restoring onto a new device; a log of who called you is not worth uploading.
+     */
+    private val historyPreferences: SharedPreferences =
+        context.applicationContext
+            .getSharedPreferences("call_blocker_history", Context.MODE_PRIVATE)
+
     /** Master switch. When off, every call is allowed through untouched. */
     var blockingEnabled: Boolean
         get() = sharedPreferences.getBoolean(KEY_BLOCKING_ENABLED, true)
@@ -43,7 +52,7 @@ class Preferences(context: Context) {
      * for a list this small.
      */
     fun blockedCallHistory(): List<BlockedCall> =
-        sharedPreferences.getString(KEY_BLOCKED_CALL_HISTORY, "")
+        historyPreferences.getString(KEY_BLOCKED_CALL_HISTORY, "")
             .orEmpty()
             .lineSequence()
             .filter { line -> line.isNotBlank() }
@@ -59,7 +68,7 @@ class Preferences(context: Context) {
     fun addBlockedCallToHistory(blockedCall: BlockedCall) {
         val trimmedHistory =
             (listOf(blockedCall) + blockedCallHistory()).take(MAXIMUM_HISTORY_ENTRIES)
-        sharedPreferences.edit()
+        historyPreferences.edit()
             .putString(
                 KEY_BLOCKED_CALL_HISTORY,
                 trimmedHistory.joinToString("\n") { entry -> "${entry.timeMillis}|${entry.number}" },
@@ -68,7 +77,7 @@ class Preferences(context: Context) {
     }
 
     fun clearBlockedCallHistory() =
-        sharedPreferences.edit().remove(KEY_BLOCKED_CALL_HISTORY).apply()
+        historyPreferences.edit().remove(KEY_BLOCKED_CALL_HISTORY).apply()
 
     private companion object {
         const val KEY_BLOCKING_ENABLED = "enabled"

@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Call Blocker</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #5c5c5c;
+    --rule: #e3e3e3;
+    --accent: #b3261e;
+    --card: #f7f7f7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121212;
+      --fg: #e8e8e8;
+      --muted: #a0a0a0;
+      --rule: #2e2e2e;
+      --accent: #f2b8b5;
+      --card: #1c1c1c;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 4rem;
+    max-width: 44rem;
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 .35rem; }
+  h2 { font-size: 1.2rem; margin: 2.25rem 0 .6rem; }
+  .updated { color: var(--muted); font-size: .9rem; margin: 0 0 2rem; }
+  a { color: var(--accent); }
+  ul { padding-left: 1.25rem; }
+  li { margin: .35rem 0; }
+  code {
+    background: var(--card);
+    padding: .12em .38em;
+    border-radius: 4px;
+    font-size: .9em;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .callout {
+    background: var(--card);
+    border-left: 3px solid var(--accent);
+    padding: .9rem 1.1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 1.5rem 0;
+  }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  th, td { text-align: left; padding: .55rem .6rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-weight: 600; }
+  .wrap { overflow-x: auto; }
+  footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: .9rem; }
+</style>
+</head>
+<body>
+
+<h1>Privacy Policy</h1>
+<p class="updated">Call Blocker (<code>com.matbcvo.callblocker</code>) — last updated 11 August 2026</p>
+
+<div class="callout">
+  <strong>Call Blocker collects nothing, sends nothing, and has no servers.</strong>
+  The app does not request the <code>INTERNET</code> permission, so it is technically
+  incapable of transmitting your data anywhere.
+</div>
+
+<h2>What the app accesses</h2>
+
+<div class="wrap">
+<table>
+  <tr><th>Permission</th><th>Why</th><th>What happens to the data</th></tr>
+  <tr>
+    <td><code>READ_CONTACTS</code></td>
+    <td>To decide whether an incoming caller is someone you know.</td>
+    <td>When a call arrives, the number is looked up against your contacts on the device.
+        The result is a yes or no. No contact is copied, stored, or transmitted.</td>
+  </tr>
+  <tr>
+    <td><code>POST_NOTIFICATIONS</code></td>
+    <td>Optional. To tell you that a call was blocked.</td>
+    <td>The notification is shown on your device only. You can turn this off in the app.</td>
+  </tr>
+</table>
+</div>
+
+<h2>What the app stores on your device</h2>
+<ul>
+  <li><strong>Your settings</strong> — whether blocking is on, and your handling preferences.</li>
+  <li><strong>A list of recently blocked calls</strong> — the number and time for up to the
+      last 100 blocked calls, so you can see what you missed.</li>
+</ul>
+<p>
+  Both are kept in the app's private storage, readable only by the app. You can erase the
+  blocked-call list at any time with the <em>Clear</em> button on the main screen.
+  Uninstalling the app removes everything.
+</p>
+
+<h2>Backups</h2>
+<p>
+  If you use Android's backup or device-transfer feature, your <em>settings</em> may be
+  copied to your own Google account so they can be restored on a new device. The
+  <em>blocked-call list is deliberately excluded</em> from these backups and never leaves
+  the device. This is enforced by the app's backup rules, not by policy alone.
+</p>
+
+<h2>What the app does not do</h2>
+<ul>
+  <li>No analytics, telemetry, crash reporting, or advertising.</li>
+  <li>No third-party libraries or SDKs of any kind — the app has zero dependencies.</li>
+  <li>No accounts, sign-in, or user identifiers.</li>
+  <li>No recording, reading, or storing of call content.</li>
+  <li>No selling or sharing of data, because none is collected.</li>
+</ul>
+
+<h2>Children</h2>
+<p>
+  The app is not directed at children and collects no personal data from anyone.
+</p>
+
+<h2>Changes</h2>
+<p>
+  If this policy changes, the updated version will be published at this address with a new
+  date above. The full revision history is public in the
+  <a href="https://github.com/matbcvo/callblocker">source repository</a>.
+</p>
+
+<h2>Contact</h2>
+<p>
+  Questions or concerns:
+  <a href="https://github.com/matbcvo/callblocker/issues">open an issue on GitHub</a>.
+</p>
+
+<footer>
+  Call Blocker is open source. You can read every line that handles your data at
+  <a href="https://github.com/matbcvo/callblocker">github.com/matbcvo/callblocker</a>.
+  &middot; <a href="./">Back to the app page</a>
+</footer>
+
+</body>
+</html>
