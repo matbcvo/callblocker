@@ -42,6 +42,20 @@ jobs:
             exit 1
           fi
 
+      # The secrets context is not available in a step-level `if:`, so the presence of
+      # the Play credentials is recorded as a step output instead.
+      - name: Check for Play credentials
+        id: play_credentials
+        env:
+          PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$PLAY_SERVICE_ACCOUNT_JSON" ]; then
+            echo 'configured=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'configured=false' >> "$GITHUB_OUTPUT"
+            echo 'No Play service account configured; the upload step will be skipped.'
+          fi
+
       - name: Decode upload keystore
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
@@ -57,8 +71,16 @@ jobs:
           # run_number is monotonic per repository, which is exactly what Play
           # requires of versionCode.
           VERSION_CODE: ${{ github.run_number }}
-          VERSION_NAME: ${{ github.ref_type == 'tag' && github.ref_name || '0.0.0-dev' }}
+          REF_NAME: ${{ github.ref_name }}
+          REF_TYPE: ${{ github.ref_type }}
         run: |
+          # Play wants "1.0.0", not the tag's "v1.0.0".
+          if [ "$REF_TYPE" = "tag" ]; then
+            export VERSION_NAME="${REF_NAME#v}"
+          else
+            export VERSION_NAME="0.0.0-dev"
+          fi
+          echo "Building versionName=$VERSION_NAME versionCode=$VERSION_CODE"
           if [ -x ./gradlew ]; then GRADLE=./gradlew; else GRADLE=gradle; fi
           "$GRADLE" bundleRelease assembleRelease --stacktrace
 
@@ -88,7 +110,7 @@ jobs:
       # Skipped automatically until the Play service account secret exists, so the
       # rest of the release still works before the Play listing is set up.
       - name: Upload to Google Play (internal testing)
-        if: ${{ github.ref_type == 'tag' && secrets.PLAY_SERVICE_ACCOUNT_JSON != '' }}
+        if: github.ref_type == 'tag' && steps.play_credentials.outputs.configured == 'true'
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
