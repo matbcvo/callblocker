@@ -27,6 +27,8 @@
 
     <string name="history_title">Hiljuti blokeeritud kõned</string>
     <string name="history_empty">Ühtegi sissetulevat kõnet pole veel blokeeritud.</string>
+    <string name="action_view_blocked_calls">Vaata hiljuti blokeeritud kõnesid</string>
+    <string name="action_clear_history">Tühjenda nimekiri</string>
 
     <string name="unknown_number">Tundmatu number</string>
 

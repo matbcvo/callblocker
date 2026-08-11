@@ -35,6 +35,12 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".BlockedCallsActivity"
+            android:exported="false"
+            android:label="@string/history_title"
+            android:parentActivityName=".MainActivity" />
+
         <service
             android:name=".CallBlockerService"
             android:exported="true"

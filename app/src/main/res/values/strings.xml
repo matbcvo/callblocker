@@ -27,6 +27,8 @@
 
     <string name="history_title">Recently blocked calls</string>
     <string name="history_empty">No incoming calls blocked yet.</string>
+    <string name="action_view_blocked_calls">View recently blocked calls</string>
+    <string name="action_clear_history">Clear this list</string>
 
     <string name="unknown_number">Unknown number</string>
 

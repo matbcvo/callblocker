@@ -9,18 +9,16 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.text.format.DateUtils
 import android.view.View
-import android.view.WindowInsets
 import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 
 /**
- * Single screen: shows whether blocking is actually live, lets the user fix whatever is
- * missing, exposes the handful of options, and lists recently blocked calls.
+ * Shows whether blocking is actually live, lets the user fix whatever is missing, and
+ * exposes the options. The list of blocked calls lives in [BlockedCallsActivity] so this
+ * stays a settings screen.
  */
 class MainActivity : Activity() {
 
@@ -35,13 +33,11 @@ class MainActivity : Activity() {
     private lateinit var silenceInsteadOfRejectSwitch: Switch
     private lateinit var keepInCallLogSwitch: Switch
     private lateinit var notifyWhenBlockedSwitch: Switch
-    private lateinit var historyContainer: LinearLayout
-    private lateinit var historyEmptyText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        applyWindowInsets()
+        findViewById<View>(R.id.root).padForSystemBars()
         preferences = Preferences(this)
 
         statusTitleText = findViewById(R.id.status_title)
@@ -53,14 +49,11 @@ class MainActivity : Activity() {
         silenceInsteadOfRejectSwitch = findViewById(R.id.switch_silence_instead_of_reject)
         keepInCallLogSwitch = findViewById(R.id.switch_keep_in_call_log)
         notifyWhenBlockedSwitch = findViewById(R.id.switch_notify_when_blocked)
-        historyContainer = findViewById(R.id.history_container)
-        historyEmptyText = findViewById(R.id.history_empty_message)
 
         screeningRoleButton.setOnClickListener { requestCallScreeningRole() }
         contactsPermissionButton.setOnClickListener { requestContactsPermission() }
-        findViewById<Button>(R.id.button_clear_history).setOnClickListener {
-            preferences.clearBlockedCallHistory()
-            renderBlockedCallHistory()
+        findViewById<Button>(R.id.button_view_blocked_calls).setOnClickListener {
+            startActivity(Intent(this, BlockedCallsActivity::class.java))
         }
 
         findViewById<TextView>(R.id.version_text).text =
@@ -102,39 +95,8 @@ class MainActivity : Activity() {
         notifyWhenBlockedSwitch.isChecked = preferences.notifyWhenCallBlocked
         renderStatus()
         renderOptions()
-        renderBlockedCallHistory()
     }
 
-    /**
-     * From targetSdk 35 onwards Android draws apps edge to edge and ignores any request
-     * not to, so the content has to be inset by hand. Padding goes on the scroll
-     * container with `clipToPadding=false`: the list starts below the status bar but
-     * still scrolls underneath it.
-     */
-    private fun applyWindowInsets() {
-        findViewById<View>(R.id.root).setOnApplyWindowInsetsListener { view, windowInsets ->
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                val systemBarInsets = windowInsets.getInsets(
-                    WindowInsets.Type.systemBars() or WindowInsets.Type.displayCutout()
-                )
-                view.setPadding(
-                    systemBarInsets.left,
-                    systemBarInsets.top,
-                    systemBarInsets.right,
-                    systemBarInsets.bottom,
-                )
-            } else {
-                @Suppress("DEPRECATION")
-                view.setPadding(
-                    windowInsets.systemWindowInsetLeft,
-                    windowInsets.systemWindowInsetTop,
-                    windowInsets.systemWindowInsetRight,
-                    windowInsets.systemWindowInsetBottom,
-                )
-            }
-            windowInsets
-        }
-    }
 
     // --- setup -------------------------------------------------------------------
 
@@ -255,24 +217,6 @@ class MainActivity : Activity() {
         notifyWhenBlockedSwitch.isEnabled = isRejectingCalls
     }
 
-    private fun renderBlockedCallHistory() {
-        val blockedCalls = preferences.blockedCallHistory()
-        historyContainer.removeAllViews()
-        historyEmptyText.visibility = if (blockedCalls.isEmpty()) View.VISIBLE else View.GONE
-
-        for (blockedCall in blockedCalls) {
-            val rowView =
-                layoutInflater.inflate(R.layout.item_blocked_call, historyContainer, false)
-            rowView.findViewById<TextView>(R.id.blocked_number).text = blockedCall.number
-            rowView.findViewById<TextView>(R.id.blocked_time).text =
-                DateUtils.getRelativeTimeSpanString(
-                    blockedCall.timeMillis,
-                    System.currentTimeMillis(),
-                    DateUtils.MINUTE_IN_MILLIS,
-                )
-            historyContainer.addView(rowView)
-        }
-    }
 
     private companion object {
         const val REQUEST_CODE_CALL_SCREENING_ROLE = 1
