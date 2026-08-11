@@ -147,7 +147,10 @@ monotonic, because Play rejects a re-used `versionCode`.
 ### 4. What Play needs beyond the build
 
 - **`targetSdk 36`** — mandatory for new apps from 31 August 2026. Already set.
-- **Privacy policy URL** — required, because the app reads contacts.
+- **Privacy policy URL** — required, because the app reads contacts. Published from
+  `docs/` by `.github/workflows/pages.yml`:
+  <https://matbcvo.github.io/callblocker/privacy.html>
+  Edit `docs/privacy.html` and push; the deploy takes about 15 seconds.
 - **Data safety form** — declare contacts access; note that it is read on-device only and
   never transmitted, which is true here since the app has no network permission.
 - The first upload of a given `applicationId` must be done by hand in the Play Console;
