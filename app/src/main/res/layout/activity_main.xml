@@ -108,11 +108,13 @@
             android:layout_marginTop="24dp"
             android:background="?android:attr/listDivider" />
 
+        <!-- Sandwiched between two dividers, so the gap above (this margin) has to
+             match the gap below (the next divider's margin) or it looks lopsided. -->
         <Button
             android:id="@+id/button_view_blocked_calls"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:text="@string/action_view_blocked_calls" />
 
         <View
