@@ -9,6 +9,7 @@ import android.app.role.RoleManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.drawable.Icon
 import android.net.Uri
 import android.os.Build
 import android.provider.ContactsContract
@@ -148,19 +149,53 @@ class CallBlockerService : CallScreeningService() {
             PendingIntent.FLAG_IMMUTABLE,
         )
 
-        val notification = Notification.Builder(this, NOTIFICATION_CHANNEL_ID)
+        val builder = Notification.Builder(this, NOTIFICATION_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_blocked)
             .setContentTitle(getString(R.string.notification_title))
             .setContentText(blockedNumber ?: getString(R.string.unknown_number))
             .setContentIntent(openApplicationIntent)
             .setAutoCancel(true)
             .setCategory(Notification.CATEGORY_STATUS)
-            .build()
+
+        // Nothing to dial or text when the caller withheld their number.
+        if (blockedNumber != null) {
+            builder.addAction(
+                buildAction(
+                    R.drawable.ic_call,
+                    R.string.action_call_back,
+                    Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", blockedNumber, null)),
+                )
+            )
+            builder.addAction(
+                buildAction(
+                    R.drawable.ic_message,
+                    R.string.action_send_message,
+                    Intent(Intent.ACTION_SENDTO, Uri.fromParts("smsto", blockedNumber, null)),
+                )
+            )
+        }
 
         // A distinct id per number keeps repeat callers from stacking up endlessly
         // while still showing separate entries for separate callers.
-        notificationManager.notify(blockedNumber.hashCode(), notification)
+        notificationManager.notify(blockedNumber.hashCode(), builder.build())
     }
+
+    /**
+     * PendingIntents are matched on action and data but not extras, so the dial and
+     * message intents for a given number are already distinct from each other and from
+     * every other number's — a shared request code cannot collide between them.
+     */
+    private fun buildAction(iconRes: Int, titleRes: Int, intent: Intent): Notification.Action =
+        Notification.Action.Builder(
+            Icon.createWithResource(this, iconRes),
+            getString(titleRes),
+            PendingIntent.getActivity(
+                this,
+                0,
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+                PendingIntent.FLAG_IMMUTABLE,
+            ),
+        ).build()
 
     companion object {
         private const val LOG_TAG = "CallBlocker"

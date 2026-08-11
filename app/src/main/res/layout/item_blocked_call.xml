@@ -35,7 +35,8 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:contentDescription="@string/action_call_back"
-        android:src="@drawable/ic_call" />
+        android:src="@drawable/ic_call"
+        android:tint="?android:attr/textColorSecondary" />
 
     <ImageButton
         android:id="@+id/button_send_message"
@@ -43,6 +44,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:contentDescription="@string/action_send_message"
-        android:src="@drawable/ic_message" />
+        android:src="@drawable/ic_message"
+        android:tint="?android:attr/textColorSecondary" />
 
 </LinearLayout>
