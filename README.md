@@ -87,6 +87,12 @@ keytool -genkeypair -v -keystore upload.jks -alias upload \
         -keyalg RSA -keysize 2048 -validity 10000
 ```
 
+`keytool` prompts for a keystore password — you choose it, it is not issued by anyone.
+When it then asks for a key password, press RETURN to reuse the same one: since JDK 9
+`keytool` writes PKCS12 keystores, which do not support a separate per-key password at
+all. Passing a different one is ignored with a warning. The two Gradle fields remain
+separate only for compatibility with the older JKS format.
+
 Keep `upload.jks` out of the repo — `.gitignore` already excludes `*.jks`. If you lose it
 you must ask Play support to reset it, so back it up somewhere durable.
 
@@ -97,9 +103,9 @@ Settings → Secrets and variables → Actions:
 | Secret | Value |
 | --- | --- |
 | `KEYSTORE_BASE64` | `base64 -w0 upload.jks` |
-| `KEYSTORE_PASSWORD` | keystore password |
+| `KEYSTORE_PASSWORD` | the password you chose above |
 | `KEY_ALIAS` | `upload` |
-| `KEY_PASSWORD` | key password |
+| `KEY_PASSWORD` | the same value as `KEYSTORE_PASSWORD` |
 | `PLAY_SERVICE_ACCOUNT_JSON` | *(optional)* service account JSON, for automatic upload |
 
 Without `PLAY_SERVICE_ACCOUNT_JSON` the release still builds and attaches artifacts to a
