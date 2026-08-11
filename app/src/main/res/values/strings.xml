@@ -3,30 +3,30 @@
     <string name="app_name">Call Blocker</string>
 
     <string name="status_active">Blocking is on</string>
-    <string name="status_active_detail">Calls from numbers that are not in your contacts are rejected.</string>
-    <string name="status_blocking_everything">Blocking every call</string>
+    <string name="status_active_detail">Incoming calls from numbers that are not in your contacts are rejected.</string>
+    <string name="status_blocking_everything">Blocking every incoming call</string>
     <string name="status_blocking_everything_detail">Every incoming call is rejected, including calls from your contacts. Nobody can reach you by phone.</string>
     <string name="status_paused">Blocking is paused</string>
-    <string name="status_paused_detail">Every call rings through until you turn blocking back on.</string>
+    <string name="status_paused_detail">Every incoming call rings through until you turn blocking back on.</string>
     <string name="status_inactive">Not set up</string>
-    <string name="status_inactive_detail">Android only lets the chosen call screening app filter calls. Set this app as the screening app to start blocking.</string>
+    <string name="status_inactive_detail">Android only lets the chosen call screening app filter incoming calls. Set this app as the screening app to start blocking.</string>
     <string name="status_no_contacts">Contacts access needed</string>
-    <string name="status_no_contacts_detail">Without contacts access the app cannot tell who you know, so all calls ring through.</string>
+    <string name="status_no_contacts_detail">Without contacts access the app cannot tell who you know, so every incoming call rings through.</string>
 
     <string name="action_set_screening_app">Set as call screening app</string>
     <string name="action_allow_contacts">Allow contacts access</string>
     <string name="action_clear">Clear</string>
 
-    <string name="option_enabled">Block calls from unknown numbers</string>
-    <string name="option_block_contacts">Block calls from contacts too</string>
+    <string name="option_enabled">Block incoming calls from unknown numbers</string>
+    <string name="option_block_contacts">Block incoming calls from contacts too</string>
     <string name="option_block_contacts_hint">Nobody gets through, including people in your contacts. A callback from a doctor, a delivery driver, or an emergency service will be blocked as well.</string>
-    <string name="option_silence">Silence instead of reject</string>
+    <string name="option_silence">Silence incoming calls instead of rejecting them</string>
     <string name="option_silence_hint">The caller hears normal ringing and can leave voicemail. Your phone stays quiet.</string>
-    <string name="option_call_log">Keep blocked calls in the call log</string>
-    <string name="option_notify">Notify me when a call is blocked</string>
+    <string name="option_call_log">Keep blocked calls in the system call log</string>
+    <string name="option_notify">Notify me when an incoming call is blocked</string>
 
-    <string name="history_title">Recently blocked</string>
-    <string name="history_empty">Nothing blocked yet.</string>
+    <string name="history_title">Recently blocked calls</string>
+    <string name="history_empty">No incoming calls blocked yet.</string>
 
     <string name="unknown_number">Unknown number</string>
 
@@ -37,10 +37,10 @@
     <string name="url_source" translatable="false">https://github.com/matbcvo/callblocker</string>
     <string name="url_privacy" translatable="false">https://matbcvo.github.io/callblocker/privacy.html</string>
 
-    <string name="channel_blocked_calls">Blocked calls</string>
-    <string name="notification_title">Call blocked</string>
+    <string name="channel_blocked_calls">Blocked incoming calls</string>
+    <string name="notification_title">Incoming call blocked</string>
 
     <string name="role_unavailable">This device does not support call screening apps.</string>
     <string name="role_denied">Blocking stays off until this app is the call screening app.</string>
-    <string name="contacts_denied">Without contacts access every call rings through.</string>
+    <string name="contacts_denied">Without contacts access every incoming call rings through.</string>
 </resources>
