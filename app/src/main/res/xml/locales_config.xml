@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Declaring the supported locales makes the app appear under
+  Settings > Apps > Call Blocker > Language on Android 13+, so the app's language
+  can be chosen independently of the system language.
+-->
+<locale-config xmlns:android="http://schemas.android.com/apk/res/android">
+    <locale android:name="en" />
+    <locale android:name="et" />
+</locale-config>

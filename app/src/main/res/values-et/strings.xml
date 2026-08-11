@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- app_name is intentionally not translated: it is the product name. -->
+
+    <string name="status_active">Blokeerimine on sisse lülitatud</string>
+    <string name="status_active_detail">Sissetulevad kõned numbritelt, mida sinu kontaktides ei ole, lükatakse tagasi.</string>
+    <string name="status_blocking_everything">Blokeeritakse kõik sissetulevad kõned</string>
+    <string name="status_blocking_everything_detail">Kõik sissetulevad kõned lükatakse tagasi, kaasa arvatud kõned sinu kontaktidelt. Keegi ei saa sinuga telefoni teel ühendust.</string>
+    <string name="status_paused">Blokeerimine on peatatud</string>
+    <string name="status_paused_detail">Kõik sissetulevad kõned tulevad läbi, kuni lülitad blokeerimise uuesti sisse.</string>
+    <string name="status_inactive">Seadistamata</string>
+    <string name="status_inactive_detail">Android lubab sissetulevaid kõnesid filtreerida ainult valitud kõnede sõelumise rakendusel. Määra see rakendus sõelumisrakenduseks, et blokeerimist alustada.</string>
+    <string name="status_no_contacts">Vajalik on juurdepääs kontaktidele</string>
+    <string name="status_no_contacts_detail">Ilma kontaktide juurdepääsuta ei tea rakendus, keda sa tunned, seega tulevad kõik sissetulevad kõned läbi.</string>
+
+    <string name="action_set_screening_app">Määra kõnede sõelumise rakenduseks</string>
+    <string name="action_allow_contacts">Luba juurdepääs kontaktidele</string>
+    <string name="action_clear">Tühjenda</string>
+
+    <string name="option_enabled">Blokeeri sissetulevad kõned tundmatutelt numbritelt</string>
+    <string name="option_block_contacts">Blokeeri sissetulevad kõned kontaktidelt</string>
+    <string name="option_block_contacts_hint">Keegi ei pääse läbi, sealhulgas sinu kontaktides olevad inimesed. Blokeeritakse ka tagasihelistamine arstilt, kullerilt või hädaabiteenistuselt.</string>
+    <string name="option_silence">Vaigista sissetulevad kõned nende tagasilükkamise asemel</string>
+    <string name="option_silence_hint">Helistaja kuuleb tavalist kutsungit ja saab jätta kõneposti sõnumi. Sinu telefon püsib vaikne.</string>
+    <string name="option_call_log">Säilita blokeeritud kõned süsteemi kõnelogis</string>
+    <string name="option_notify">Teavita mind, kui sissetulev kõne blokeeritakse</string>
+
+    <string name="history_title">Hiljuti blokeeritud kõned</string>
+    <string name="history_empty">Ühtegi sissetulevat kõnet pole veel blokeeritud.</string>
+
+    <string name="unknown_number">Tundmatu number</string>
+
+    <string name="about_version">Call Blocker %1$s</string>
+    <string name="action_view_source">Avatud lähtekood GitHubis</string>
+    <string name="action_privacy_policy">Privaatsuspoliitika</string>
+    <string name="no_browser">Linkide avamiseks pole ühtegi rakendust.</string>
+
+    <string name="channel_blocked_calls">Blokeeritud sissetulevad kõned</string>
+    <string name="notification_title">Sissetulev kõne blokeeritud</string>
+
+    <string name="role_unavailable">See seade ei toeta kõnede sõelumise rakendusi.</string>
+    <string name="role_denied">Blokeerimine jääb välja lülitatuks, kuni see rakendus on kõnede sõelumise rakendus.</string>
+    <string name="contacts_denied">Ilma kontaktide juurdepääsuta tulevad kõik sissetulevad kõned läbi.</string>
+</resources>
