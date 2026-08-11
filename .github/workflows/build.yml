@@ -6,11 +6,25 @@ on:
   pull_request:
   workflow_dispatch:
 
+# Pull requests from forks get a read-only token by default; stating it explicitly
+# means a future workflow edit cannot widen it by accident.
+permissions:
+  contents: read
+
 concurrency:
   group: build-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
+  # Runs in seconds with no SDK, so a contributor adding a language gets feedback
+  # long before the Gradle jobs finish.
+  translations:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Check translations are complete and declared
+        run: python3 scripts/check-translations.py
+
   build:
     runs-on: ubuntu-latest
     steps:

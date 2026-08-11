@@ -74,12 +74,21 @@ sdk.dir=/path/to/Android/Sdk
 
 ## Continuous integration
 
-`.github/workflows/build.yml` builds a debug APK and an unsigned release bundle on every
-push to `main` and every pull request, and uploads both as workflow artifacts. The debug
-APK is signed with the standard debug key and installs on a device as-is — the quickest
-way to get a build onto a phone without touching signing.
+`.github/workflows/build.yml` runs on every push to `main` and every pull request:
 
-Both workflows run the committed wrapper, so CI and local builds use the same Gradle.
+| Job | What it does |
+| --- | --- |
+| `translations` | Checks translations are complete and declared in `locales_config.xml`. |
+| `build` | Builds the debug APK and the release bundle, uploaded as artifacts. |
+| `lint` | Runs Android lint. Informational — it does not block. |
+
+The debug APK is signed with the standard debug key and installs on a device as-is — the
+quickest way to get a build onto a phone without touching signing.
+
+No job needs repository secrets, so all three run on pull requests from forks. Both
+workflows run the committed wrapper, so CI and local builds use the same Gradle.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for how to build and how to add a translation.
 
 ## Releasing to Google Play
 
