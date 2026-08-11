@@ -6,6 +6,15 @@ plugins {
 // enters the repo. Absent them (any local build), the release build stays unsigned.
 val keystorePath: String? = System.getenv("KEYSTORE_FILE")
 
+// CI sets this from the git tag; local builds fall back.
+val appVersionName: String = System.getenv("VERSION_NAME") ?: "1.0"
+
+// Names the build outputs after the app and its version rather than the Gradle default
+// of "app", so a downloaded artifact says which release it is.
+base {
+    archivesName.set("callblocker-$appVersionName")
+}
+
 android {
     namespace = "com.matbcvo.callblocker"
     compileSdk = 36
@@ -20,7 +29,7 @@ android {
         // Play rejects a re-upload of an already-used versionCode, so CI overrides it
         // with a monotonic build number.
         versionCode = System.getenv("VERSION_CODE")?.toIntOrNull() ?: 1
-        versionName = System.getenv("VERSION_NAME") ?: "1.0"
+        versionName = appVersionName
     }
 
     signingConfigs {

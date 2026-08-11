@@ -164,13 +164,17 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <!-- paddingEnd is deliberately left at the default: only the leading edge
+                 is flattened, so this button's text lines up with the content above
+                 it in both LTR and RTL. -->
             <Button
                 android:id="@+id/button_view_source"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="0dp"
-                android:text="@string/action_view_source" />
+                android:text="@string/action_view_source"
+                tools:ignore="RtlSymmetry" />
 
             <Button
                 android:id="@+id/button_privacy_policy"

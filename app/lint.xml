@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lint>
+    <!--
+      Lint suggests folding mipmap-anydpi-v26 into mipmap-anydpi because minSdk is 29.
+      Doing so makes AAPT2 fail to resolve mipmap/ic_launcher at all:
+
+        error: resource mipmap/ic_launcher ... not found
+
+      The adaptive-icon resource is only registered when the folder carries the v26
+      qualifier, so the "obsolete" qualifier is load-bearing. Scoped to this folder so
+      genuinely obsolete qualifiers elsewhere are still reported.
+    -->
+    <issue id="ObsoleteSdkInt">
+        <ignore path="src/main/res/mipmap-anydpi-v26" />
+    </issue>
+</lint>
