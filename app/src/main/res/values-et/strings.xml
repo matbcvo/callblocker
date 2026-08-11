@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- app_name is intentionally not translated: it is the product name. -->
+    <string name="app_name">Kõneblokeerija</string>
 
     <string name="status_active">Blokeerimine on sisse lülitatud</string>
     <string name="status_active_detail">Sissetulevad kõned numbritelt, mida sinu kontaktides ei ole, lükatakse tagasi.</string>
@@ -30,7 +30,7 @@
 
     <string name="unknown_number">Tundmatu number</string>
 
-    <string name="about_version">Call Blocker %1$s</string>
+    <string name="about_version">Kõneblokeerija %1$s</string>
     <string name="action_view_source">Avatud lähtekood GitHubis</string>
     <string name="action_privacy_policy">Privaatsuspoliitika</string>
     <string name="no_browser">Linkide avamiseks pole ühtegi rakendust.</string>

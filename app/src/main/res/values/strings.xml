@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
-    <string name="app_name" translatable="false">Call Blocker</string>
+    <string name="app_name">Call Blocker</string>
 
     <string name="status_active">Blocking is on</string>
     <string name="status_active_detail">Incoming calls from numbers that are not in your contacts are rejected.</string>
