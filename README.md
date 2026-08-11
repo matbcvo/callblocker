@@ -109,7 +109,29 @@ Settings → Secrets and variables → Actions:
 | `PLAY_SERVICE_ACCOUNT_JSON` | *(optional)* service account JSON, for automatic upload |
 
 Without `PLAY_SERVICE_ACCOUNT_JSON` the release still builds and attaches artifacts to a
-GitHub Release; only the Play upload step is skipped.
+GitHub Release; only the Play upload step is skipped. Set it up later, or never.
+
+<details>
+<summary>Getting <code>PLAY_SERVICE_ACCOUNT_JSON</code></summary>
+
+Requires a Google Play Developer account (one-time $25 registration).
+
+1. **Play Console → Setup → API access** — link a Google Cloud project.
+2. **Google Cloud Console → IAM & Admin → Service Accounts** — create a service account,
+   then **Keys → Add key → Create new key → JSON**. This downloads a `.json` file.
+3. **Play Console → Users and permissions** — invite the service account's email address
+   and grant it release permissions for this app, at minimum "Release to testing tracks"
+   for the `internal` track the workflow targets.
+
+The secret's value is the entire contents of the downloaded `.json` file.
+
+Two ordering constraints: the API cannot create a listing, so the first AAB for a given
+`applicationId` must be uploaded by hand; and freshly granted permissions take a few
+minutes to propagate, so an immediate first run may return 401.
+
+Menu paths drift — treat the above as the shape of the flow rather than exact labels.
+
+</details>
 
 ### 3. Cut a release
 
