@@ -4,23 +4,45 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingVertical="10dp">
+    android:paddingVertical="6dp">
 
-    <TextView
-        android:id="@+id/blocked_number"
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/blocked_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="?android:attr/textColorSecondary" />
+        <TextView
+            android:id="@+id/blocked_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/blocked_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="?android:attr/textColorSecondary" />
+    </LinearLayout>
+
+    <!-- Both hidden for withheld numbers, where there is nothing to dial. -->
+    <ImageButton
+        android:id="@+id/button_call_back"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:contentDescription="@string/action_call_back"
+        android:src="@drawable/ic_call" />
+
+    <ImageButton
+        android:id="@+id/button_send_message"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:contentDescription="@string/action_send_message"
+        android:src="@drawable/ic_message" />
 
 </LinearLayout>

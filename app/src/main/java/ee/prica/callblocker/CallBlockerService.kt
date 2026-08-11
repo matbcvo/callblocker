@@ -65,7 +65,10 @@ class CallBlockerService : CallScreeningService() {
         preferences.addBlockedCallToHistory(
             BlockedCall(
                 timeMillis = callDetails.creationTimeMillis,
-                number = incomingNumber ?: getString(R.string.unknown_number),
+                // Stored empty rather than as translated text: the history is data, and
+                // a withheld number has to stay distinguishable from a real one so the
+                // list knows whether calling back is even possible.
+                number = incomingNumber.orEmpty(),
             )
         )
         if (preferences.notifyWhenCallBlocked) {
