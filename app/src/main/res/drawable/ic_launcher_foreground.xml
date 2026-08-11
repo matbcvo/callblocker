@@ -1,20 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Adaptive icon foreground: a handset crossed by a "blocked" ring, drawn inside the
-     inner 72x72dp safe zone of the 108x108dp canvas. -->
+<!--
+  Adaptive icon foreground: a handset struck through by a diagonal slash.
+
+  The adaptive icon canvas is 108x108dp and only the centred 72x72dp is guaranteed
+  visible; launcher masks crop the rest. The artwork below is authored in the usual
+  24x24 icon space and mapped into that safe zone by the group transform.
+
+  With pivot at the origin the transform is simply `p * scale + translate`, so for the
+  24x24 art to sit centred at 54: translate = 54 - 12 * 2.6 = 22.8. The art therefore
+  spans 22.8..85.2, comfortably inside the safe zone with room for circular masks.
+-->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
     <group
-        android:pivotX="54"
-        android:pivotY="54"
-        android:scaleX="2.2"
-        android:scaleY="2.2"
-        android:translateX="42"
-        android:translateY="42">
+        android:pivotX="0"
+        android:pivotY="0"
+        android:scaleX="2.6"
+        android:scaleY="2.6"
+        android:translateX="22.8"
+        android:translateY="22.8">
+
+        <!-- Handset -->
         <path
             android:fillColor="#FFFFFFFF"
-            android:pathData="M12,2C6.48,2 2,6.48 2,12s4.48,10 10,10 10,-4.48 10,-10S17.52,2 12,2zM4,12c0,-4.42 3.58,-8 8,-8 1.85,0 3.55,0.63 4.9,1.69L5.69,16.9C4.63,15.55 4,13.85 4,12zM12,20c-1.85,0 -3.55,-0.63 -4.9,-1.69L18.31,7.1C19.37,8.45 20,10.15 20,12c0,4.42 -3.58,8 -8,8z" />
+            android:pathData="M20.01,15.38c-1.23,0 -2.42,-0.2 -3.53,-0.56 -0.35,-0.12 -0.74,-0.03 -1.01,0.24l-1.57,1.97c-2.83,-1.35 -5.48,-3.9 -6.89,-6.83l1.95,-1.66c0.27,-0.28 0.35,-0.67 0.24,-1.02 -0.37,-1.11 -0.56,-2.3 -0.56,-3.53 0,-0.54 -0.45,-0.99 -0.99,-0.99H4.19C3.65,3 3,3.24 3,3.99 3,13.28 10.73,21 20.01,21c0.71,0 0.99,-0.63 0.99,-1.18v-3.45c0,-0.54 -0.45,-0.99 -0.99,-0.99z" />
+
+        <!-- Gap punched in the handset, in the background colour, so the slash reads
+             as a separate stroke. It runs across the handset's own diagonal, not
+             along it, or it would simply erase the shape. -->
+        <path
+            android:pathData="M21.2,2.8 L2.8,21.2"
+            android:strokeColor="#FFB3261E"
+            android:strokeWidth="4.6"
+            android:strokeLineCap="round" />
+
+        <!-- The slash itself -->
+        <path
+            android:pathData="M20.2,3.8 L3.8,20.2"
+            android:strokeColor="#FFFFFFFF"
+            android:strokeWidth="2.4"
+            android:strokeLineCap="round" />
     </group>
 </vector>
