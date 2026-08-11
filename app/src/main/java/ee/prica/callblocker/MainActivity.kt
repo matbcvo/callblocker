@@ -210,11 +210,19 @@ class MainActivity : Activity() {
     }
 
     private fun renderOptions() {
+        // Until Android routes calls to this app, none of these options do anything.
+        // Leaving them usable would suggest the app is configured when it is not.
+        val hasCallScreeningRole = CallBlockerService.isCallScreeningRoleHeld(this)
+
         // The call-log and notification options only apply to rejected calls; a silenced
         // call is handled by the system dialer and always logged.
         val isRejectingCalls = !preferences.silenceInsteadOfReject
-        keepInCallLogSwitch.isEnabled = isRejectingCalls
-        notifyWhenBlockedSwitch.isEnabled = isRejectingCalls
+
+        blockingEnabledSwitch.isEnabled = hasCallScreeningRole
+        blockEveryCallSwitch.isEnabled = hasCallScreeningRole
+        silenceInsteadOfRejectSwitch.isEnabled = hasCallScreeningRole
+        keepInCallLogSwitch.isEnabled = hasCallScreeningRole && isRejectingCalls
+        notifyWhenBlockedSwitch.isEnabled = hasCallScreeningRole && isRejectingCalls
     }
 
 
