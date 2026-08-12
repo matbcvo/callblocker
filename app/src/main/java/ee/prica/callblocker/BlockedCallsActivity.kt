@@ -3,8 +3,11 @@ package ee.prica.callblocker
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.ActivityNotFoundException
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.Menu
@@ -126,8 +129,23 @@ class BlockedCallsActivity : Activity() {
                     Intent(Intent.ACTION_SENDTO, phoneUri("smsto", blockedCall.number))
                 )
             }
+            // Long press to copy, as dialers and messaging apps do.
+            rowView.setOnLongClickListener {
+                copyNumber(blockedCall.number)
+                true
+            }
         }
         return rowView
+    }
+
+    private fun copyNumber(number: String) {
+        val clipboard = getSystemService(ClipboardManager::class.java) ?: return
+        clipboard.setPrimaryClip(ClipData.newPlainText(getString(R.string.app_name), number))
+        // From Android 13 the system shows its own confirmation when something is
+        // copied, so a toast here would say it twice.
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            Toast.makeText(this, R.string.number_copied, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun phoneUri(scheme: String, number: String): Uri =

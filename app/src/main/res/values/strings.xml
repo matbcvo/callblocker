@@ -33,6 +33,7 @@
     <string name="action_call_back">Call back</string>
     <string name="action_send_message">Send a message</string>
     <string name="no_app_available">No app available for that.</string>
+    <string name="number_copied">Number copied</string>
 
     <string name="unknown_number">Unknown number</string>
 

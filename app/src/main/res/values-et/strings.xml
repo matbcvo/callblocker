@@ -33,6 +33,7 @@
     <string name="action_call_back">Helista tagasi</string>
     <string name="action_send_message">Saada sõnum</string>
     <string name="no_app_available">Selle jaoks pole ühtegi rakendust.</string>
+    <string name="number_copied">Number kopeeritud</string>
 
     <string name="unknown_number">Tundmatu number</string>
 
