@@ -152,7 +152,10 @@ class CallBlockerService : CallScreeningService() {
         val builder = Notification.Builder(this, NOTIFICATION_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_blocked)
             .setContentTitle(getString(R.string.notification_title))
-            .setContentText(blockedNumber ?: getString(R.string.unknown_number))
+            .setContentText(
+                blockedNumber?.let { formatPhoneNumberForDisplay(it) }
+                    ?: getString(R.string.unknown_number)
+            )
             .setContentIntent(openApplicationIntent)
             .setAutoCancel(true)
             .setCategory(Notification.CATEGORY_STATUS)

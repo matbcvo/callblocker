@@ -103,7 +103,11 @@ class BlockedCallsActivity : Activity() {
         // baked into the history when the call arrived.
         val hasNumber = blockedCall.number.isNotBlank()
         rowView.findViewById<TextView>(R.id.blocked_number).text =
-            if (hasNumber) blockedCall.number else getString(R.string.unknown_number)
+            if (hasNumber) {
+                formatPhoneNumberForDisplay(blockedCall.number)
+            } else {
+                getString(R.string.unknown_number)
+            }
         rowView.findViewById<TextView>(R.id.blocked_time).text =
             DateUtils.getRelativeTimeSpanString(
                 blockedCall.timeMillis,
