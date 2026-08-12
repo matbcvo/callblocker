@@ -1,14 +1,15 @@
 package ee.prica.callblocker
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.format.DateUtils
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -23,7 +24,9 @@ class BlockedCallsActivity : Activity() {
     private lateinit var preferences: Preferences
     private lateinit var listContainer: LinearLayout
     private lateinit var emptyText: TextView
-    private lateinit var clearButton: Button
+
+    /** Drives whether the clear action is offered; there is nothing to clear when empty. */
+    private var hasBlockedCalls = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +37,6 @@ class BlockedCallsActivity : Activity() {
         preferences = Preferences(this)
         listContainer = findViewById(R.id.history_container)
         emptyText = findViewById(R.id.history_empty_message)
-        clearButton = findViewById(R.id.button_clear_history)
-
-        clearButton.setOnClickListener {
-            preferences.clearBlockedCallHistory()
-            render()
-        }
     }
 
     override fun onResume() {
@@ -47,21 +44,49 @@ class BlockedCallsActivity : Activity() {
         render()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.blocked_calls, menu)
+        return true
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu): Boolean {
+        menu.findItem(R.id.action_clear_history)?.isVisible = hasBlockedCalls
+        return super.onPrepareOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            finish()
-            return true
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+            R.id.action_clear_history -> {
+                confirmClearHistory()
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    /** Clearing cannot be undone, so it asks first. */
+    private fun confirmClearHistory() {
+        AlertDialog.Builder(this)
+            .setMessage(R.string.clear_history_confirm)
+            .setNegativeButton(android.R.string.cancel, null)
+            .setPositiveButton(R.string.action_clear_history) { _, _ ->
+                preferences.clearBlockedCallHistory()
+                render()
+            }
+            .show()
     }
 
     private fun render() {
         val blockedCalls = preferences.blockedCallHistory()
         listContainer.removeAllViews()
 
-        val isEmpty = blockedCalls.isEmpty()
-        emptyText.visibility = if (isEmpty) View.VISIBLE else View.GONE
-        clearButton.visibility = if (isEmpty) View.GONE else View.VISIBLE
+        hasBlockedCalls = blockedCalls.isNotEmpty()
+        emptyText.visibility = if (hasBlockedCalls) View.GONE else View.VISIBLE
+        invalidateOptionsMenu()
 
         for (blockedCall in blockedCalls) {
             listContainer.addView(createRow(blockedCall))

@@ -20,18 +20,13 @@
             android:text="@string/history_empty"
             android:textColor="?android:attr/textColorSecondary" />
 
+        <!-- Clearing lives in the app bar menu, not at the end of this list: with a
+             full history the button would have been a long scroll away. -->
         <LinearLayout
             android:id="@+id/history_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
-
-        <Button
-            android:id="@+id/button_clear_history"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/action_clear_history" />
 
     </LinearLayout>
 </ScrollView>

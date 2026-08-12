@@ -29,6 +29,7 @@
     <string name="history_empty">No incoming calls blocked yet.</string>
     <string name="action_view_blocked_calls">View recently blocked calls</string>
     <string name="action_clear_history">Clear this list</string>
+    <string name="clear_history_confirm">Clear the list of recently blocked calls? This cannot be undone.</string>
     <string name="action_call_back">Call back</string>
     <string name="action_send_message">Send a message</string>
     <string name="no_app_available">No app available for that.</string>

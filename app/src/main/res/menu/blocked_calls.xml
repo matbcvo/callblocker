@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- In the overflow rather than the bar itself: it is destructive and irreversible,
+         so it should take a deliberate tap rather than sit under a stray thumb. -->
+    <item
+        android:id="@+id/action_clear_history"
+        android:title="@string/action_clear_history"
+        android:showAsAction="never" />
+</menu>
