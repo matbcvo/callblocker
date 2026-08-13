@@ -1,51 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Two levels: the touchable row, and a hairline beneath it. The divider sits outside
+     the touch target so the press ripple does not paint over it. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:attr/selectableItemBackground"
-    android:gravity="center_vertical"
-    android:orientation="horizontal"
-    android:paddingVertical="6dp">
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:id="@+id/row_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="10dp">
 
-        <TextView
-            android:id="@+id/blocked_number"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingEnd="8dp">
 
-        <TextView
-            android:id="@+id/blocked_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="?android:attr/textColorSecondary" />
+            <TextView
+                android:id="@+id/blocked_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/blocked_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="?android:attr/textColorSecondary" />
+        </LinearLayout>
+
+        <!-- Both hidden for withheld numbers, where there is nothing to dial. -->
+        <ImageButton
+            android:id="@+id/button_call_back"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="@string/action_call_back"
+            android:src="@drawable/ic_call"
+            android:tint="?android:attr/textColorSecondary" />
+
+        <ImageButton
+            android:id="@+id/button_send_message"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="@string/action_send_message"
+            android:src="@drawable/ic_message"
+            android:tint="?android:attr/textColorSecondary" />
     </LinearLayout>
 
-    <!-- Both hidden for withheld numbers, where there is nothing to dial. -->
-    <ImageButton
-        android:id="@+id/button_call_back"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:contentDescription="@string/action_call_back"
-        android:src="@drawable/ic_call"
-        android:tint="?android:attr/textColorSecondary" />
-
-    <ImageButton
-        android:id="@+id/button_send_message"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:contentDescription="@string/action_send_message"
-        android:src="@drawable/ic_message"
-        android:tint="?android:attr/textColorSecondary" />
+    <View
+        android:id="@+id/row_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
 
 </LinearLayout>

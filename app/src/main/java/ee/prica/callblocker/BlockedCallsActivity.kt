@@ -91,13 +91,18 @@ class BlockedCallsActivity : Activity() {
         emptyText.visibility = if (hasBlockedCalls) View.GONE else View.VISIBLE
         invalidateOptionsMenu()
 
-        for (blockedCall in blockedCalls) {
-            listContainer.addView(createRow(blockedCall))
+        for ((index, blockedCall) in blockedCalls.withIndex()) {
+            listContainer.addView(
+                createRow(blockedCall, isLastRow = index == blockedCalls.lastIndex)
+            )
         }
     }
 
-    private fun createRow(blockedCall: BlockedCall): View {
+    private fun createRow(blockedCall: BlockedCall, isLastRow: Boolean): View {
         val rowView = layoutInflater.inflate(R.layout.item_blocked_call, listContainer, false)
+        // No trailing hairline under the final row; it would read as a cut-off list.
+        rowView.findViewById<View>(R.id.row_divider).visibility =
+            if (isLastRow) View.GONE else View.VISIBLE
 
         // A withheld number is stored empty, so the label is localised here rather than
         // baked into the history when the call arrived.
@@ -134,7 +139,7 @@ class BlockedCallsActivity : Activity() {
                 )
             }
             // Long press to copy, as dialers and messaging apps do.
-            rowView.setOnLongClickListener {
+            rowView.findViewById<View>(R.id.row_content).setOnLongClickListener {
                 copyNumber(blockedCall.number)
                 true
             }
