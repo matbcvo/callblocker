@@ -11,3 +11,4 @@ captures/
 *.apk
 *.keystore
 *.jks
+gradle/gradle-daemon-jvm.properties
