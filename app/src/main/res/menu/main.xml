@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Reference rather than action, so it lives in the overflow. The source link
+         stays in the footer, where it is visible rather than tucked away. -->
+    <item
+        android:id="@+id/action_privacy_policy"
+        android:title="@string/action_privacy_policy"
+        android:showAsAction="never" />
+</menu>

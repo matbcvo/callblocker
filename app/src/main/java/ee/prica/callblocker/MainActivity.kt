@@ -9,6 +9,8 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.Switch
@@ -61,9 +63,6 @@ class MainActivity : Activity() {
         findViewById<Button>(R.id.button_view_source).setOnClickListener {
             openLink(getString(R.string.url_source))
         }
-        findViewById<Button>(R.id.button_privacy_policy).setOnClickListener {
-            openLink(getString(R.string.url_privacy))
-        }
 
         blockingEnabledSwitch.setOnCheckedChangeListener { _, isChecked ->
             preferences.blockingEnabled = isChecked
@@ -84,6 +83,19 @@ class MainActivity : Activity() {
             preferences.notifyWhenCallBlocked = isChecked
             if (isChecked) requestNotificationPermission()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_privacy_policy) {
+            openLink(getString(R.string.url_privacy))
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onResume() {
