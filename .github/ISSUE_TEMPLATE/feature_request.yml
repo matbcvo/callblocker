@@ -1,0 +1,39 @@
+name: Feature request
+description: Suggest something the app should do
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Two things the app deliberately will not do, so you know before writing:
+
+        - **Nothing that needs the internet.** The app requests no internet permission at
+          all, which is what makes its privacy claims verifiable rather than a promise.
+          That rules out spam databases, caller ID lookup, and cloud sync.
+        - **Nothing that needs a restricted permission.** In particular reading the call
+          log or SMS, which would require a Google Play declaration and review.
+
+        Suggestions that fit inside those limits are very welcome.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: What are you trying to do that the app makes hard or impossible today?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you like it to do?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Anything you tried instead?
+      description: >
+        Including Android's own features — Do Not Disturb covers scheduled silence better
+        than an app can.

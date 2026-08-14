@@ -1,0 +1,107 @@
+name: Bug report
+description: Something does not work as expected
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Call blocking can only be reproduced with a real incoming call, so the more of
+        this you can fill in, the less guessing is needed.
+
+  - type: input
+    id: app-version
+    attributes:
+      label: App version
+      description: Shown at the bottom of the app's main screen, e.g. "Call Blocker 1.4.2".
+      placeholder: "1.4.2"
+    validations:
+      required: true
+
+  - type: input
+    id: android-version
+    attributes:
+      label: Android version
+      description: Settings → About phone → Android version.
+      placeholder: "16"
+    validations:
+      required: true
+
+  - type: input
+    id: device
+    attributes:
+      label: Phone model
+      description: Manufacturer and model. OEM dialers differ in how they honour blocking.
+      placeholder: "Google Pixel 10 Pro"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: installed-from
+    attributes:
+      label: Where did you install it from?
+      options:
+        - Google Play
+        - GitHub release APK
+        - Built from source
+    validations:
+      required: true
+
+  - type: dropdown
+    id: status-line
+    attributes:
+      label: What does the top of the main screen say?
+      description: >
+        This one line tells us whether the app holds the call screening role, whether it
+        has contacts access, and which mode it is in — often enough to explain the
+        problem on its own.
+      options:
+        - Blocking is on
+        - Blocking every incoming call
+        - Blocking is paused
+        - Not set up
+        - Contacts access needed
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: options
+    attributes:
+      label: Which options were switched on?
+      options:
+        - label: Block incoming calls from unknown numbers
+        - label: Block incoming calls from contacts
+        - label: Silence incoming calls instead of rejecting them
+        - label: Keep blocked calls in the system call log
+        - label: Notify me when an incoming call is blocked
+
+  - type: dropdown
+    id: caller
+    attributes:
+      label: Who was calling?
+      options:
+        - A number not in my contacts
+        - A number saved in my contacts
+        - A withheld or private number
+        - Not applicable
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened, and what did you expect instead?
+      placeholder: |
+        The call rang normally even though the number is not in my contacts.
+        I expected it to be rejected.
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: >
+        Optional but very helpful. With the phone connected over USB, run
+        `adb logcat -s CallBlocker` and place a call. The app logs the reason whenever it
+        lets a call through unexpectedly.
+      render: text

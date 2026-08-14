@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: How to build, and how to add a translation
+    url: https://github.com/matbcvo/callblocker/blob/main/CONTRIBUTING.md
+    about: Building the app, what CI checks, and the two files a translation needs.
+  - name: Privacy policy
+    url: https://matbcvo.github.io/callblocker/privacy.html
+    about: What the app accesses, what it stores, and what it never sends anywhere.

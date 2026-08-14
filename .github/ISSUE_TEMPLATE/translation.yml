@@ -1,0 +1,39 @@
+name: Translation
+description: Offer a new language, or report wrong wording in an existing one
+labels: ["translation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A pull request is welcome too and is usually faster — CONTRIBUTING.md covers it,
+        and it is two files with no code involved.
+
+  - type: input
+    id: language
+    attributes:
+      label: Language
+      description: Name and ISO code.
+      placeholder: "Finnish (fi)"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What is this about?
+      options:
+        - A new language the app does not have yet
+        - Wrong or awkward wording in an existing translation
+        - Text that does not fit on screen
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: >
+        For wording problems, please quote the current text and suggest the replacement.
+        A screenshot helps for anything that does not fit.
+    validations:
+      required: true
